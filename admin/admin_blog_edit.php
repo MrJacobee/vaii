@@ -1,9 +1,5 @@
 <?php
-	session_start();
-	$meno = $_SESSION['usrnm'];
-	if(empty($meno)){
-		header("Location: https://uni.kramar.im/admin/login.php");
-	}
+	
 	
 	
 	
@@ -61,7 +57,10 @@
 		<?php
 			require_once "cfg.php";
 			$query = "SELECT * FROM blog";
+			die();
 			if($result = mysqli_query($conn, $query)){
+				var_dump($result); 
+				
 				if(mysqli_num_rows($result)>0){
 					echo "<table class='table table-bordered'>";
 						echo "<thead>";
@@ -92,9 +91,7 @@
 					echo "<p> Nišť neni v db zatiaľ </p>";
 				}
 			}
-			else {
-				echo "Tož, voľáčo je naprd s DB, kukaj: " . mysqli_error($conn);
-			}
+			
 			mysqli_close($conn);
 		?>
 		<div class="line"></div>
