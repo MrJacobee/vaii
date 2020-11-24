@@ -4,6 +4,35 @@
 	if(empty($meno)){
 		header("Location: https://uni.kramar.im/admin/login.php");
 	}
+	
+	require_once "cfg.php";
+	$title=$body='';
+	$titleErr=$bodyErr='';
+	extract($_POST);
+	if(isset($_POST['submit'])){
+		$nadpisInput = filter_input(INPUT_POST, 'title');
+		$obsahInput = filter_input(INPUT_POST, 'body');
+		if(empty($nadpisInput)){
+			$titleErr="Zadaj nadpis";
+		}
+		else {
+			$title = $nadpisInput;
+		}
+		
+		if(empty($obsahInput)){
+			$bodyErr="Zadaj obsah";
+		}
+		else {
+			$body = $obsahInput;
+		}
+		
+		if(!empty($title) && !empty($body)){
+			$query = "INSERT INTO blog (title, body) VALUES (?,?)";
+			$insertQuery = $conn->prepare($query);
+			$insertQuery->bind_param('ss',$title,$body);
+			$insertQuery->execute();
+		}
+	}
 ?>
 <!DOCTYPE html>
 <html lang="zxx">
@@ -55,7 +84,7 @@
 		<h2> Blog Admin</h2>
 		<div class="line"></div>
 		<h4>Vloženie článku</h4>
-		<form action="control/blog_post.php" method="post">
+		<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 		  <div class="form-group">
 			<label for="title">Nadpis</label> 
 			<input id="title" name="title" placeholder="Nadpis článku" type="text" required="required" class="form-control">

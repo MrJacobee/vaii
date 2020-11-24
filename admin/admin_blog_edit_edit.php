@@ -4,6 +4,33 @@
 	if(empty($meno)){
 		header("Location: https://uni.kramar.im/admin/login.php");
 	}
+	
+	require_once "cfg.php";
+	$title=$body='';
+	$titleErr=$bodyErr='';
+	extract($_POST);
+	if(isset($_POST['id'] && !empty($_POST['id'])){
+		$query="UPDATE blog SET title=?, body=? WHERE id=?";
+		$updateQuery = $conn->prepare($query);
+		$updateQuery->bind_param('ssi',$title,$body,$id);
+		$updateQuery->execute();
+	}
+	else {
+		if(isset($_GET["id"] && !empty(trim($_GET["id"]))){
+			$id = trim($_GET["id"]);
+			$query = "SELECT  * FROM blog WHERE id=?";
+			$selectQuery = $conn->prepare($query);
+			$selectQuery->bind_param('i',$id);
+			$selectQuery->execute();
+			$exec=$selectQuery->get_results();
+			if($exec->num_rows == 1){
+				$row = mysqli_fetch_array($exec, MYSQLI_ASSOC);
+				$title = $row["title"];
+				$body = $row["body"];
+				
+			}
+		}
+	}
 ?>
 <!DOCTYPE html>
 <html lang="zxx">
@@ -54,48 +81,21 @@
     <div id="content">
 		<h2> Blog Admin</h2>
 		<div class="line"></div>
-		<h4>Zoznam</h4>
-		<?php
-		
-			require_once "cfg.php";
-			$query = "SELECT * FROM blog";
-			
-			if($result = mysqli_query($conn, $query)){
-				
-				
-				if(mysqli_num_rows($result)>0){
-					echo "<table class='table table-bordered'>";
-						echo "<thead>";
-							echo "<tr>";
-								echo "<th>ID</th>";
-								echo "<th>Nadpis</th>";
-								echo "<th>Text</th>";
-								echo "<th>Čo chceš robiť s tým, ha ?</th>";
-							echo "</tr>";
-						echo "</thead>";
-						echo "<tbody>";
-						while ($row = mysqli_fetch_array($result)){
-							echo "<tr>";
-								echo "<td>" . $row['id'] . "</td>";
-								echo "<td>" . $row['title'] . "</td>";
-								echo "<td>" . substr($row["body"],0,15) . "</td>";
-								echo "<td>";
-									echo "<a href='admin_blog_edit_edit.php?id=". $row['id'] ."'>Edit</a> ";
-									echo " <a href='admin_blog_edit_delete.php?id=". $row['id'] ."'>Delete</a>";
-								echo"</td>";
-							echo "</tr>";	
-						}
-						echo "</tbody>";
-					echo "</table>";
-					mysqli_free_result($result);
-				}
-				else {
-					echo "<p> Nišť neni v db zatiaľ </p>";
-				}
-			}
-			
-			mysqli_close($conn);
-		?>
+		<h4>Upraviť článok</h4>
+		<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+		  <div class="form-group">
+			<label for="title">Nadpis</label> 
+			<input id="title" name="title" placeholder="Nadpis článku" type="text" required="required" class="form-control">
+		  </div>
+		  <div class="form-group">
+			<label for="body">Text</label> 
+			<textarea id="body" name="body" cols="40" rows="5" required="required" class="form-control"></textarea>
+		  </div> 
+		  <div class="form-group">
+			<input type="hidden" name="id" value="<?php echo $id; ?>"/>
+			<button name="submit" type="submit" class="btn btn-primary">Postnúť</button>
+		  </div>
+		</form>
 		<div class="line"></div>
 		<div class="line"></div>
     </div>
