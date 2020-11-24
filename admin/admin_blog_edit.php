@@ -79,8 +79,8 @@
 								echo "<td>" . $row['title'] . "</td>";
 								echo "<td>" . substr($row["body"],0,15) . "</td>";
 								echo "<td>"
-									echo "<a href='admin_blog_edit_edit.php?id=".$row['id'] ."'>Edit</a>";
-									echo "<a href='admin_blog_edit_delete.php?id=".$row['id'] ."'>Delete</a>";
+									echo "<a href='admin_blog_edit_edit.php?id=". $row['id'] ."'>Edit</a>";
+									echo "<a href='admin_blog_edit_delete.php?id=". $row['id'] ."'>Delete</a>";
 								echo"</td>";
 							echo "</tr>";	
 						}
