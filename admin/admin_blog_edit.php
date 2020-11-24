@@ -1,9 +1,3 @@
-<?php
-	
-	
-	
-	
-?>
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
@@ -55,9 +49,10 @@
 		<div class="line"></div>
 		<h4>Zoznam</h4>
 		<?php
+		die();
 			require_once "cfg.php";
 			$query = "SELECT * FROM blog";
-			die();
+			
 			if($result = mysqli_query($conn, $query)){
 				var_dump($result); 
 				
