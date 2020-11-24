@@ -27,21 +27,21 @@
 
         <ul class="list-unstyled components">
 
-            <li class="active">
-                <a href="#">Dashboard</a>
+            <li >
+                <a href="admin.php">Dashboard</a>
             </li>
-            <li>
-                <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Blog</a>
-				<ul class="collapse list-unstyled" id="pageSubmenu">
-                    <li>
-                        <a href="admin_blog.php">Pridať článok</a>
+            <li class="active">
+                <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle">Blog</a>
+				<ul class="expand list-unstyled" id="pageSubmenu">
+                    <li class="active">
+                        <a href="#">Pridať článok</a>
                     </li>
                     <li>
-                        <a href="admin_blog_edit.php">Zoznam článkov</a>
+                        <a href="admin_blog_edit.php">Zoznam Článkov</a>
                     </li>
                 </ul>
             </li>
-            <li>
+            <li >
                 <a href="admin_gallery.php">Galéria</a>
             </li>
         </ul>
@@ -52,17 +52,24 @@
 </div>
     <!-- OBSAH STRÁNKY  -->
     <div id="content">
-		<h2> hmmm ....</h2>
-		<p><h5>To do:</h5>
-			<ul>
-				<li>Dashboard content</li>
-				<li>IMG admin</li>
-				<li>.... responsive design (both page and back office)</li>
-				<li>migrate to main domain</li>
-				<li>feed the cats</li>
-				<li>give /admin a nice structure so it doesn't look like a cow has puked all over it</li>
-			</ul>
-		</p>
+		<h2> Blog Admin</h2>
+		<div class="line"></div>
+		<h4>Vloženie článku</h4>
+		<form action="control/blog_post.php" method="post">
+		  <div class="form-group">
+			<label for="title">Nadpis</label> 
+			<input id="title" name="title" placeholder="Nadpis článku" type="text" required="required" class="form-control">
+		  </div>
+		  <div class="form-group">
+			<label for="body">Text</label> 
+			<textarea id="body" name="body" cols="40" rows="5" required="required" class="form-control"></textarea>
+		  </div> 
+		  <div class="form-group">
+			<button name="submit" type="submit" class="btn btn-primary">Postnúť</button>
+		  </div>
+		</form>
+		<div class="line"></div>
+		
 		<div class="line"></div>
     </div>
 

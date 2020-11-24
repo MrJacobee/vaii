@@ -4,6 +4,9 @@
 	if(empty($meno)){
 		header("Location: https://uni.kramar.im/admin/login.php");
 	}
+	
+	
+	
 ?>
 <!DOCTYPE html>
 <html lang="zxx">
@@ -27,21 +30,21 @@
 
         <ul class="list-unstyled components">
 
-            <li class="active">
-                <a href="#">Dashboard</a>
+            <li >
+                <a href="admin.php">Dashboard</a>
             </li>
-            <li>
-                <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Blog</a>
-				<ul class="collapse list-unstyled" id="pageSubmenu">
-                    <li>
+            <li class="active">
+                <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle">Blog</a>
+				<ul class="expand list-unstyled" id="pageSubmenu">
+                    <li >
                         <a href="admin_blog.php">Pridať článok</a>
                     </li>
-                    <li>
-                        <a href="admin_blog_edit.php">Zoznam článkov</a>
+                    <li class="active">
+                        <a href="#">Zoznam článkov</a>
                     </li>
                 </ul>
             </li>
-            <li>
+            <li >
                 <a href="admin_gallery.php">Galéria</a>
             </li>
         </ul>
@@ -52,17 +55,49 @@
 </div>
     <!-- OBSAH STRÁNKY  -->
     <div id="content">
-		<h2> hmmm ....</h2>
-		<p><h5>To do:</h5>
-			<ul>
-				<li>Dashboard content</li>
-				<li>IMG admin</li>
-				<li>.... responsive design (both page and back office)</li>
-				<li>migrate to main domain</li>
-				<li>feed the cats</li>
-				<li>give /admin a nice structure so it doesn't look like a cow has puked all over it</li>
-			</ul>
-		</p>
+		<h2> Blog Admin</h2>
+		<div class="line"></div>
+		<h4>Zoznam</h4>
+		<?php
+			require_once "cfg.php";
+			$query = "SELECT * FROM blog";
+			if($result = mysqli_query($conn, $query)){
+				if(mysqli_num_rows($result)>0){
+					echo "<table class='table table-bordered'>";
+						echo "<thead>";
+							echo "<tr>";
+								echo "<th>ID</th>";
+								echo "<th>Nadpis</th>";
+								echo "<th>Text</th>";
+								echo "<th>Čo chceš robiť s tým, ha ?</th>";
+							echo "</tr>";
+						echo "</thead>";
+						echo "<tbody>";
+						while ($row = mysqli_fetch_array($result)){
+							echo "<tr>";
+								echo "<td>" . $row['id'] . "</td>";
+								echo "<td>" . $row['title'] . "</td>";
+								echo "<td>" . substr($row["body"],0,15) . "</td>";
+								echo "<td>"
+									echo "<a href='admin_blog_edit_edit.php?id=".$row['id'] ."'>Edit</a>";
+									echo "<a href='admin_blog_edit_delete.php?id=".$row['id'] ."'>Delete</a>";
+								echo"</td>";
+							echo "</tr>";	
+						}
+						echo "</tbody>";
+					echo "</table>";
+					mysqli_free_result($result);
+				}
+				else {
+					echo "<p> Nišť neni v db zatiaľ </p>";
+				}
+			}
+			else {
+				echo "Tož, voľáčo je naprd s DB, kukaj: " . mysqli_error($conn);
+			}
+			mysqli_close($conn);
+		?>
+		<div class="line"></div>
 		<div class="line"></div>
     </div>
 

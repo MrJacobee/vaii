@@ -27,8 +27,8 @@
 
         <ul class="list-unstyled components">
 
-            <li class="active">
-                <a href="#">Dashboard</a>
+            <li >
+                <a href="admin.php">Dashboard</a>
             </li>
             <li>
                 <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Blog</a>
@@ -37,12 +37,12 @@
                         <a href="admin_blog.php">Pridať článok</a>
                     </li>
                     <li>
-                        <a href="admin_blog_edit.php">Zoznam článkov</a>
+                        <a href="admin_blog_edit.php">Upraviť článok</a>
                     </li>
                 </ul>
             </li>
-            <li>
-                <a href="admin_gallery.php">Galéria</a>
+            <li class="active">
+                <a href="#">Galéria</a>
             </li>
         </ul>
 		<button onclick="location.href='https://uni.kramar.im/admin/logout.php'" type="button">Logout</button>
@@ -52,17 +52,8 @@
 </div>
     <!-- OBSAH STRÁNKY  -->
     <div id="content">
-		<h2> hmmm ....</h2>
-		<p><h5>To do:</h5>
-			<ul>
-				<li>Dashboard content</li>
-				<li>IMG admin</li>
-				<li>.... responsive design (both page and back office)</li>
-				<li>migrate to main domain</li>
-				<li>feed the cats</li>
-				<li>give /admin a nice structure so it doesn't look like a cow has puked all over it</li>
-			</ul>
-		</p>
+		<h2> Image Admin Page What Something ... dunno</h2>
+		<p> Well. Nothing to see here really. </p>
 		<div class="line"></div>
     </div>
 

@@ -1,6 +1,3 @@
-<?php
-	include('auth.php');
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +18,7 @@
         <label for="pwd"><b>Heslo</b></label>
         <input type="password" placeholder="Heslo" id="pwd" name="pwd" required>
 
-        <button type="submit">Prihlásiť</button>
+        <button type="submit" name="submit">Prihlásiť</button>
     </div>
 </form>
 
